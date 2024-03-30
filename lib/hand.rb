@@ -1,11 +1,11 @@
-require 'card'
-require 'deck'
+require_relative 'card'
+require_relative 'deck'
 class Hand
     attr_reader :hand
     def initialize(hand)
         @hand = hand
     end
-    def cards
+    def cards #displays hand
         @hand
     end
     def delete1(place) #added these in order to actually delete and add cards, I couldnt figure out another way to do it because of how a hand object is structured
@@ -14,7 +14,7 @@ class Hand
     def add1(card)
         @hand << card
     end
-    def hand_strength
+    def hand_strength #determines rankings of hands
         if royal_flush
             return 10
         elsif straight_flush
@@ -123,7 +123,7 @@ class Hand
             return true
         end
     end
-    def versus(hand2)
+    def versus(hand2) #determines which hand beats which
         high_card1 = @hand.max_by { |i| i.rank_value}
         high_card2 = hand2.hand.max_by { |i| i.rank_value}
         hand1_strength = hand_strength
@@ -138,7 +138,7 @@ class Hand
             elsif high_card2.rank_value > high_card1.rank_value
                 return 2
             else
-                puts 'how did you get here'
+                return 2
             end
         end
     end

@@ -1,4 +1,4 @@
-require 'card'
+require_relative 'card'
 class Deck
     attr_reader :deck
     def initialize
@@ -14,10 +14,10 @@ class Deck
     def length #added this to make other rspec tests easier to verify
         @deck.length()
     end
-    def shuffle
+    def shuffle #shuffles the deck
         @deck.shuffle
     end
-    def deal
+    def deal #removes a card from the deck
         @deck.pop
     end
 end

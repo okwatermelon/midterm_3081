@@ -1,10 +1,10 @@
 class Card
     attr_reader :suit, :rank
-    def initialize(suit,rank)
+    def initialize(rank,suit)
         @suit = suit
         @rank = rank
     end
-    def rank_value
+    def rank_value #values for straight detection later on
         if @rank == 'jack'
             return 11
         elsif @rank == 'queen'
@@ -17,7 +17,7 @@ class Card
             return @rank
         end
     end
-    def display
-        return @suit, @rank
+    def display #random convenience, not necessary
+        return @rank, @suit
     end
 end

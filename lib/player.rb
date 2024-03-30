@@ -1,22 +1,31 @@
-require 'card'
-require 'deck'
-require 'hand'
+require_relative 'card'
+require_relative 'deck'
+require_relative 'hand'
 class Player
     attr_reader :pot, :hand
     def initialize(pot, hand)
         @pot = pot
         @hand = hand
     end
-    def discard(place, deck)
-        @hand.delete1(place)
-        @hand.add1(deck.deal)
+    def hand=(new_hand) #updates hand
+        @hand = new_hand
     end
-    def discard_start(deck)
+    def add_to_pot(num) #adds to pot
+        @pot += num
+    end
+    def discard(place, deck) #discards
+        @hand.delete1(place)
+        @hand.add1(deck.pop)
+    end
+    def discard_start(deck) #starts discard process up to 3
         puts "How many cards would you like to discard? (up to 3)"
         input = gets.chomp.to_i
-        if input > 3 || input < 1
+        if input > 3 || input < 0
             puts "Invalid input, try again"
             discard_start
+        end
+        if input == 0
+            return 0
         end
         input.times do
             puts "Which card would you like to discard? (position of card)"
@@ -24,8 +33,9 @@ class Player
             discard(card_index, deck)
         end
     end
-    def turn(current_bet)
-        puts "fold see or raise?"
+    def turn(current_bet) # handles players turn
+        puts "fold see or raise?, you have #{@pot} chips, the current bet is #{current_bet}"
+        puts @hand.cards.display
         input = gets.chomp
         if input == 'fold'
             @hand = []
@@ -47,8 +57,9 @@ class Player
                 current_bet += num
             end
         else
-            puts "Invalid Input, try again"
-            turn(current_bet)
+            puts "Invalid Input, folding"
+            hand = []
         end
+        current_bet
     end
 end
