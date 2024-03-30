@@ -4,7 +4,7 @@ RSpec.describe Card do
     it 'makes a card with a selected suit and number' do
         card = Card.new('spades', 'ace')
         expect(card.suit).to eq('spades')
-        expect(card.value).to eq('ace')
+        expect(card.rank).to eq('ace')
     end
 end
 end

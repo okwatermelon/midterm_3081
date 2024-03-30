@@ -17,4 +17,7 @@ class Card
             return @rank
         end
     end
+    def display
+        return @suit, @rank
+    end
 end

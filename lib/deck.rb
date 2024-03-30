@@ -11,6 +11,9 @@ class Deck
             end
         end
     end
+    def length #added this to make other rspec tests easier to verify
+        @deck.length()
+    end
     def shuffle
         @deck.shuffle
     end

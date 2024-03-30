@@ -5,6 +5,15 @@ class Hand
     def initialize(hand)
         @hand = hand
     end
+    def cards
+        @hand
+    end
+    def delete1(place) #added these in order to actually delete and add cards, I couldnt figure out another way to do it because of how a hand object is structured
+        @hand.delete_at(place)
+    end
+    def add1(card)
+        @hand << card
+    end
     def hand_strength
         if royal_flush
             return 10
